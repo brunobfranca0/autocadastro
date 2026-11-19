@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1A1C1F" />
+    <title>AutoCadastro - ficha de veículos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#ficha">Pular para a ficha</a>
+
+    <header class="mast">
+      <div class="mast-inner">
+        <div>
+          <p class="mast-kicker">Pátio</p>
+          <h1 translate="no">AutoCadastro</h1>
+        </div>
+        <p class="mast-line">Preencha a ficha. Os carros salvos aparecem na lista.</p>
+      </div>
+    </header>
+
+    <div class="page">
+      <div id="aviso-config" class="banner" hidden>
+        <p>
+          A ficha não grava porque faltam as chaves do Firebase. Cole elas em
+          <code translate="no">js/firebase-config.js</code>. O passo a passo está no
+          <code>README.md</code>.
+        </p>
+      </div>
+
+      <main class="desk">
+        <section class="slip" id="ficha" aria-labelledby="form-titulo">
+          <div class="plate" aria-hidden="true">
+            <div class="plate-band">
+              <span>Brasil</span>
+              <span class="plate-country" translate="no">BR</span>
+            </div>
+            <p class="plate-letters is-empty" id="placa-preview">·······</p>
+            <p class="plate-caption" id="placa-legenda">Marca e modelo</p>
+          </div>
+
+          <div class="slip-head">
+            <h2 id="form-titulo">Ficha</h2>
+            <p class="slip-note">A placa tem 7 caracteres, em maiúsculas. O ano tem 4 dígitos.</p>
+          </div>
+
+          <form id="form-automovel" novalidate autocomplete="off">
+            <div class="fields">
+              <label class="field">
+                <span>Marca</span>
+                <input id="marca" name="marca" type="text" autocomplete="off" required placeholder="Toyota…" />
+                <small class="field-error" id="erro-marca" hidden></small>
+              </label>
+              <label class="field">
+                <span>Modelo</span>
+                <input id="modelo" name="modelo" type="text" autocomplete="off" required placeholder="Corolla…" />
+                <small class="field-error" id="erro-modelo" hidden></small>
+              </label>
+              <label class="field">
+                <span>Cor</span>
+                <input id="cor" name="cor" type="text" autocomplete="off" required placeholder="Prata…" />
+                <small class="field-error" id="erro-cor" hidden></small>
+              </label>
+              <label class="field">
+                <span>Placa</span>
+                <input
+                  id="placa"
+                  name="placa"
+                  type="text"
+                  autocomplete="off"
+                  autocapitalize="characters"
+                  spellcheck="false"
+                  required
+                  placeholder="ABC1D23"
+                  minlength="7"
+                  maxlength="7"
+                />
+                <small class="field-error" id="erro-placa" hidden></small>
+              </label>
+              <div class="field-pair">
+                <label class="field">
+                  <span>Ano</span>
+                  <input
+                    id="ano"
+                    name="ano"
+                    type="number"
+                    inputmode="numeric"
+                    min="1900"
+                    autocomplete="off"
+                    spellcheck="false"
+                    required
+                    placeholder="2022…"
+                  />
+                  <small class="field-error" id="erro-ano" hidden></small>
+                </label>
+                <label class="field">
+                  <span>Km</span>
+                  <input
+                    id="km"
+                    name="km"
+                    type="number"
+                    inputmode="numeric"
+                    min="0"
+                    step="1"
+                    autocomplete="off"
+                    spellcheck="false"
+                    required
+                    placeholder="45.000…"
+                  />
+                  <small class="field-error" id="erro-km" hidden></small>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" id="btn-salvar" class="btn btn-primary">Guardar ficha</button>
+              <button type="button" id="btn-cancelar" class="btn btn-quiet" hidden>Descartar</button>
+            </div>
+          </form>
+
+          <p id="feedback" class="feedback" role="status" aria-live="polite" hidden></p>
+        </section>
+
+        <section class="yard" aria-labelledby="lista-titulo">
+          <div class="yard-head">
+            <h2 id="lista-titulo">No pátio</h2>
+            <p id="lista-contagem" class="yard-count" aria-live="polite">0 carros</p>
+          </div>
+
+          <ul id="lista-automoveis" class="yard-list" aria-label="Carros já anotados na ficha">
+            <li class="yard-empty">Nenhum carro nesta ficha.</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>
